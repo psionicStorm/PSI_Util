@@ -76,3 +76,8 @@ FILE * psi_try_fopen(char * path, char * settings) {
     printf("Error opening %s %s\n", path, settings);
     exit(EXIT_FAILURE);
 }
+
+void print_byte_buf(uint8_t * buf, size_t n) {
+    for (size_t i = 0; i < n; i++)printf("%02x", buf[i]);
+    printf("\n");
+}

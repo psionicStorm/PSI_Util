@@ -29,7 +29,7 @@ extern "C" {
     void slice_free_char_buffer(char *** buffer, size_t n1, size_t n2);
     void atob(char* string, uint8_t* binary);
     FILE * psi_try_fopen(char * path, char * settings);
-
+    void print_byte_buf(uint8_t * buf, size_t n);
 
 #ifdef __cplusplus
 }
