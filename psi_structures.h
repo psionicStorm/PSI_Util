@@ -94,12 +94,12 @@ extern "C" {
      * + last used hash function number
      * + reduced to unsigned 8 bytes hash value 
      */
-    typedef struct PSI_Cuckoo_element {
-        struct PSI_Cuckoo_element * next;
-        struct PSI_Cuckoo_element * prev;
+    typedef struct PSI_Cuckoo_list_element {
+        struct PSI_Cuckoo_list_element * next;
+        struct PSI_Cuckoo_list_element * prev;
         uint8_t * buffer;
         uint64_t hash_val;
-    } PSI_Cuckoo_element;
+    } PSI_Cuckoo_list_element;
 
     /*
      * Self-implemented double-linked list 
@@ -107,7 +107,7 @@ extern "C" {
      * this certain task functionality.
      */
     typedef struct PSI_Cuckoo_list {
-        PSI_Cuckoo_element * root;
+        PSI_Cuckoo_list_element * root;
         size_t size;
     } PSI_Cuckoo_list;
 
