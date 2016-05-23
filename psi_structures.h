@@ -71,6 +71,9 @@ extern "C" {
         uint8_t hash_n;
         size_t rec_limit;
         size_t read_buffer_size;
+        FILE * f_stash;
+        FILE * f_source;
+        FILE * f_dest;
     } PSI_CUCKOO_HASHING_CTX;
 
     /*
