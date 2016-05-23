@@ -64,6 +64,7 @@ extern "C" {
         double d_mult_size_table;
         size_t size_table;
         struct PSI_Cuckoo_list * l;
+        GTree * tree;
         uint64_t divisor;
         off_t size_source;
         uint8_t seed[3][16];
