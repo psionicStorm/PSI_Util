@@ -28,6 +28,7 @@ extern "C" {
     void slice_alloc_char_buffer(char *** buffer, size_t n1, size_t n2);
     void slice_free_char_buffer(char *** buffer, size_t n1, size_t n2);
     void atob(char* string, uint8_t* binary);
+    FILE * psi_try_fopen(char * path, char * settings);
 
 
 #ifdef __cplusplus

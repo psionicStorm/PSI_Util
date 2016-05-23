@@ -42,12 +42,12 @@ void slice_free_byte_buffer(uint8_t *** buffer, size_t n1, size_t n2) {
 void slice_alloc_char_buffer(char *** buffer, size_t n1, size_t n2) {
     *buffer = (char**) malloc(sizeof (char*) * n1);
     for (size_t i = 0; i < n1; i++)
-        (*buffer)[i] = g_slice_alloc(sizeof(char) * n2);
+        (*buffer)[i] = g_slice_alloc(sizeof (char) * n2);
 }
 
 void slice_free_char_buffer(char *** buffer, size_t n1, size_t n2) {
     for (size_t i = 0; i < n1; i++)
-        g_slice_free1(sizeof(char) * n2, (*buffer)[i]);
+        g_slice_free1(sizeof (char) * n2, (*buffer)[i]);
     free(*buffer);
 }
 
@@ -60,4 +60,19 @@ void atob(char* string, uint8_t* binary) {
         byte[1] = string[i * 2 + 1];
         binary[i] = strtol(byte, NULL, 16);
     }
+}
+
+FILE * psi_try_fopen(char * path, char * settings) {
+    FILE * f;
+    if (path == NULL || settings == NULL) {
+        printf("Trying to fopen NULL\n");
+        exit(EXIT_FAILURE);
+    } else if (strlen(path) < 1 || strlen(settings) < 1)
+        printf("Trying to fopen empty string\n");
+    else
+        f = fopen(path, settings);
+    if (f != NULL)
+        return f;
+    printf("Error opening %s %s\n", path, settings);
+    exit(EXIT_FAILURE);
 }

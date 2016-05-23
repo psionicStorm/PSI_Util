@@ -72,11 +72,27 @@ extern "C" {
         size_t read_buffer_size;
     } PSI_CUCKOO_HASHING_CTX;
 
+    /*
+     * Queue for parsing buckets.
+     * Every queue has two-dimensional
+     * binary array for maintaining elements
+     * to be added to buckets and counter. Goal is 
+     * to reduce HDD/SSD access tries maintaining
+     * relatively big buckets in RAM and writing them down
+     * only after reaching some threshold.
+     */
     typedef struct PSI_Queue {
         uint8_t ** buffer;
         uint counter;
     } PSI_Queue;
 
+    /*
+     * List element. 
+     * Contains exactly one element in buffer
+     * + current 2-byte recursive depth limiter value
+     * + last used hash function number
+     * + reduced to unsigned 8 bytes hash value 
+     */
     typedef struct PSI_Cuckoo_element {
         struct PSI_Cuckoo_element * next;
         struct PSI_Cuckoo_element * prev;
@@ -84,6 +100,11 @@ extern "C" {
         uint64_t hash_val;
     } PSI_Cuckoo_element;
 
+    /*
+     * Self-implemented double-linked list 
+     * with !only needed! and optimized for
+     * this certain task functionality.
+     */
     typedef struct PSI_Cuckoo_list {
         PSI_Cuckoo_element * root;
         size_t size;
