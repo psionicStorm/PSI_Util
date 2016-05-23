@@ -64,6 +64,7 @@ extern "C" {
         double d_mult_size_table;
         size_t size_table;
         struct PSI_Cuckoo_list * l;
+        GSList * wait_list;
         GTree * tree;
         uint64_t divisor;
         off_t size_source;
@@ -103,6 +104,12 @@ extern "C" {
         uint8_t * buffer;
         uint64_t hash_val;
     } PSI_Cuckoo_list_element;
+    
+    /*Wait list element*/
+    typedef struct PSI_Cuckoo_wle {
+        uint8_t * buffer;
+        uint64_t * hash_val;
+    } PSI_Cuckoo_wle;
 
     /*
      * Self-implemented double-linked list 
