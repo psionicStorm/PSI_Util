@@ -56,6 +56,20 @@ extern "C" {
         uint8_t threads;
     } PSI_SIMPLE_HASHING_CTX;
 
+    typedef struct PSI_NAIVE_HASHING_CTX {
+        char path_root[128];
+        char path_source[128];
+        char path_dest[128];
+        uint8_t element_pow;
+        uint8_t threads;
+        off_t size_source;
+        off_t size_dest;
+        size_t read_buffer_size;
+        size_t write_buffer_size;
+        size_t elem_size;
+        size_t hash_size;
+    } PSI_NAIVE_HASHING_CTX;
+
     typedef struct PSI_CUCKOO_HASHING_CTX {
         char path_source[128];
         char path_dest[128];
@@ -104,7 +118,7 @@ extern "C" {
         uint8_t * buffer;
         uint64_t hash_val;
     } PSI_Cuckoo_list_element;
-    
+
     /*Wait list element*/
     typedef struct PSI_Cuckoo_wle {
         uint8_t * buffer;
