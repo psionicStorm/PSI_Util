@@ -57,19 +57,39 @@ extern "C" {
     } PSI_SIMPLE_HASHING_CTX;
 
     typedef struct PSI_NAIVE_HASHING_CTX {
+        uint8_t ** r_buf;
+        uint8_t ** w_buf;
         char path_root[128];
         char path_source[128];
-        char path_dest[128];
-        uint8_t element_pow;
-        uint8_t threads;
+        char path_dest_me[128];
+        char path_dest_b[128];
+        FILE* f_source;
+        FILE* f_dest_me;
+        FILE* f_dest_b;
         off_t size_source;
         off_t size_dest;
         size_t read_buffer_size;
         size_t write_buffer_size;
         size_t elem_size;
         size_t hash_size;
+        size_t actual_array;
+        gboolean writing_flag;
+        size_t threads;
+
+        enum Role {
+            UNDEFINED = 0,
+            SERVER = 1,
+            CLIENT = 2
+        } role;
+
+        uint32_t ip;
+        size_t port;
     } PSI_NAIVE_HASHING_CTX;
 
+    /*typedef enum PSI_NETWORK_ROLE {
+        ROLE_SERVER, ROLE_CLIENT
+    } PSI_NETWORK_ROLE;
+     */
     typedef struct PSI_CUCKOO_HASHING_CTX {
         char path_source[128];
         char path_dest[128];

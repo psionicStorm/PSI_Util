@@ -29,8 +29,19 @@ void psi_mkdir(char* path) {
 
 void slice_alloc_byte_buffer(uint8_t *** buffer, size_t n1, size_t n2) {
     *buffer = (uint8_t**) malloc(sizeof (uint8_t*) * n1);
+    if (*buffer = NULL)
+        printf("Error by malloc\n");
     for (size_t i = 0; i < n1; i++)
         (*buffer)[i] = g_slice_alloc(n2);
+}
+
+uint8_t ** slice_alloc_byte_buffer_new(size_t n1, size_t n2) {
+    uint8_t ** buffer = (uint8_t**) malloc(sizeof (uint8_t*) * n1);
+    if (buffer = NULL)
+        printf("Error by malloc\n");
+    for (size_t i = 0; i < n1; i++)
+        buffer[i] = g_slice_alloc(n2);
+    return buffer;
 }
 
 void slice_free_byte_buffer(uint8_t *** buffer, size_t n1, size_t n2) {
@@ -41,6 +52,8 @@ void slice_free_byte_buffer(uint8_t *** buffer, size_t n1, size_t n2) {
 
 void slice_alloc_char_buffer(char *** buffer, size_t n1, size_t n2) {
     *buffer = (char**) malloc(sizeof (char*) * n1);
+    if (*buffer = NULL)
+        printf("Error by malloc\n");
     for (size_t i = 0; i < n1; i++)
         (*buffer)[i] = g_slice_alloc(sizeof (char) * n2);
 }
