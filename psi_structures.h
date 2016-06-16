@@ -57,8 +57,8 @@ extern "C" {
     } PSI_SIMPLE_HASHING_CTX;
 
     typedef struct PSI_NAIVE_HASHING_CTX {
-        uint8_t ** r_buf;
-        uint8_t ** w_buf;
+        uint8_t * r_buf;
+        uint8_t * w_buf;
         char path_root[128];
         char path_source[128];
         char path_dest_me[128];
@@ -72,8 +72,6 @@ extern "C" {
         size_t write_buffer_size;
         size_t elem_size;
         size_t hash_size;
-        size_t actual_array;
-        gboolean writing_flag;
         size_t threads;
 
         enum Role {
@@ -83,6 +81,7 @@ extern "C" {
         } role;
 
         uint32_t ip;
+        char ip_str[16];
         size_t port;
     } PSI_NAIVE_HASHING_CTX;
 
