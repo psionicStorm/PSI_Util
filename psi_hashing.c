@@ -63,3 +63,10 @@ void print_hash(uint8_t hash[32]) {
         printf("%02x", hash[i]);
     printf("\n");
 }
+
+void get_16_bit_sha256(uint8_t * elem, uint8_t * hash) {
+    uint8_t buf[SHA256_DIGEST_LENGTH];
+    get_sha256(elem, buf);
+    for (int i = 0; i < 16; i++)
+        hash[i] = buf[i]^buf[i + 16];
+}

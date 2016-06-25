@@ -8,6 +8,7 @@
 #ifndef PSI_STRUCTURES_H
 #define PSI_STRUCTURES_H
 
+#include <stdio.h>
 #include <glib-2.0/glib.h>
 #include <stdint.h>
 
@@ -21,6 +22,7 @@ extern "C" {
         char ** buffer;
         off_t fsize[2];
         GSList * result;
+        uint8_t element_size;
     } PSI_SIMPLE_INTERSECTION_CTX;
 
     typedef struct PSI_INTERSECTION_CTX {
@@ -29,6 +31,7 @@ extern "C" {
         char path_root[128];
         char path_result[128];
         char path_folder_buckets[128];
+        char path_lookup[128];
         gboolean bucketing;
         size_t bucket_n;
         uint8_t ** buffer;
@@ -36,8 +39,9 @@ extern "C" {
         size_t queue_buffer_size;
         struct PSI_Queue ** queues;
         GSList * result;
-        uint8_t element_pow;
+        uint8_t element_size;
         uint8_t threads;
+        gboolean lookup;
     } PSI_INTERSECTION_CTX;
 
     typedef struct PSI_SIMPLE_HASHING_CTX {

@@ -23,6 +23,7 @@ extern "C" {
     void get_sha256(uint8_t element[16], uint8_t digest[SHA256_DIGEST_LENGTH]);
     void bytes_to_chars(uint8_t * byte_array, char * buffer, uint length);
     void print_hash(uint8_t hash[32]);
+    void get_16_bit_sha256(uint8_t * elem, uint8_t * hash);
 
 
 #ifdef __cplusplus
