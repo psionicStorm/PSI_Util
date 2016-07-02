@@ -58,6 +58,7 @@ extern "C" {
         uint8_t seed[3][16];
         uint8_t hash_n;
         uint8_t threads;
+        double table_size;
     } PSI_SIMPLE_HASHING_CTX;
 
     typedef struct PSI_NAIVE_HASHING_CTX {
