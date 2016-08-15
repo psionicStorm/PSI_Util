@@ -3,20 +3,20 @@
  * Author: Oleksandr Tkachenko
  */
 
-#ifndef PSI_HASHING_H
-#define PSI_HASHING_H
+#ifndef PSI_HASHING_H 
+#define PSI_HASHING_H 
 
-#include <glib-2.0/glib.h>
-#include <stdint.h>
-#include <openssl/sha.h>
-#include <string.h>
-#include <stdio.h>
-#include <inttypes.h>
-#include <stdint.h>
+#include <glib-2.0/glib.h> 
+#include <stdint.h> 
+#include <openssl/sha.h> 
+#include <string.h> 
+#include <stdio.h> 
+#include <inttypes.h> 
+#include <stdint.h> 
 
-#ifdef __cplusplus
+#ifdef __cplusplus 
 extern "C" {
-#endif
+#endif 
 
     void psi_get_64bit_sha256_with_seed(uint8_t seed[16], uint8_t element[16], uint64_t * ret_buffer);
     void psi_get_64bit_sha256(uint8_t element[16], uint64_t * buffer);
@@ -26,9 +26,9 @@ extern "C" {
     void get_16_bit_sha256(uint8_t * elem, uint8_t * hash);
 
 
-#ifdef __cplusplus
+#ifdef __cplusplus 
 }
-#endif
+#endif 
 
 #endif /* PSI_HASHING_H */
 

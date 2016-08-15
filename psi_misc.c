@@ -1,4 +1,4 @@
-#include "psi_misc.h"
+#include "psi_misc.h" 
 
 off_t fsize(const char *filename) {
     struct stat st;
@@ -30,15 +30,15 @@ void psi_mkdir(char* path) {
 void slice_alloc_byte_buffer(uint8_t *** buffer, size_t n1, size_t n2) {
     *buffer = (uint8_t**) malloc(sizeof (uint8_t*) * n1);
     if (*buffer = NULL)
-        printf("Error by malloc\n");
+        perror("Error by malloc\n");
     for (size_t i = 0; i < n1; i++)
         (*buffer)[i] = g_slice_alloc(n2);
 }
 
 uint8_t ** slice_alloc_byte_buffer_new(size_t n1, size_t n2) {
-    uint8_t ** buffer = (uint8_t**) malloc(sizeof (*buffer) * n1);
+    uint8_t ** buffer = (uint8_t**) malloc(sizeof(*buffer) * n1);
     if (buffer = NULL)
-        printf("Error by malloc\n");
+        perror("Error by malloc\n");
     for (size_t i = 0; i < n1; i++)
         buffer[i] = g_slice_alloc(n2);
     return buffer;

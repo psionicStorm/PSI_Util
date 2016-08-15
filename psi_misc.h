@@ -5,20 +5,20 @@
  * Created on May 5, 2016, 12:12 AM
  */
 
-#ifndef PSI_MISC_H
-#define PSI_MISC_H
+#ifndef PSI_MISC_H 
+#define PSI_MISC_H 
 
-#include <glib-2.0/glib.h>
-#include <sys/stat.h>
-#include <string.h>
-#include <stdio.h>
-#include <errno.h>
-#include <stdlib.h>
-#include <stdint.h>
+#include <glib-2.0/glib.h> 
+#include <sys/stat.h> 
+#include <string.h> 
+#include <stdio.h> 
+#include <errno.h> 
+#include <stdlib.h> 
+#include <stdint.h> 
 
-#ifdef __cplusplus
+#ifdef __cplusplus 
 extern "C" {
-#endif
+#endif 
 
     off_t fsize(const char *filename);
     void get_bucket_path(gboolean a, char* buffer, char* folder, uint16_t n);
@@ -32,9 +32,9 @@ extern "C" {
     FILE * psi_try_fopen(char * path, char * settings);
     void print_byte_buf(uint8_t * buf, size_t n);
 
-#ifdef __cplusplus
+#ifdef __cplusplus 
 }
-#endif
+#endif 
 
 #endif /* PSI_MISC_H */
 
