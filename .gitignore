@@ -1,5 +1,0 @@
-libpsi-util.a
-*.o
-.git*
-.dep.inc
-nbproject/*
