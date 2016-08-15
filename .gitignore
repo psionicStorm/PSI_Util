@@ -1,6 +1,5 @@
 libpsi-util.a
-nbproject/*
-.git
-.dep.inc
 *.o
-dependencies
+.git*
+.dep.inc
+nbproject/*
