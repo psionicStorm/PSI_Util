@@ -1,11 +1,19 @@
 ##PSI##
 ###Cuckoo Hashing###
 
-__Install:__ sudo make install
+__Install:__
+```
+sudo make install
+```
+__Clean:__ 
+```
+sudo make clean
+```
 
-__Clean:__ sudo make clean
-
-__Remove:__ sudo make remove
+__Remove:__ 
+```
+sudo make remove
+```
 
 __Dependencies:__ libglib2.0-dev, libssl-dev
 
