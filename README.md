@@ -15,12 +15,12 @@ __Remove:__
 sudo make remove
 ```
 
-__Dependencies:__ 
+###Dependencies:
 ---
  * libglib2.0-dev
  * libssl-dev
 
-__Usage:__
+###Usage:
 ---
 This library can be included using -lpsi-util option and 
 headers using -I/usr/include/psi_util option.
