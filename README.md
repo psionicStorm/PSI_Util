@@ -1,6 +1,6 @@
-##PSI##
+# Private Set Intersection (PSI)
 ###Cuckoo Hashing###
-
+---
 __Install:__
 ```
 sudo make install
@@ -17,7 +17,8 @@ sudo make remove
 
 __Dependencies:__ 
 ---
-libglib2.0-dev, libssl-dev
+ * libglib2.0-dev
+ * libssl-dev
 
 __Usage:__
 ---
