@@ -1,5 +1,5 @@
 # Private Set Intersection (PSI)
-###Cuckoo Hashing###
+###PSI utilities library###
 ---
 __Install:__
 ```
