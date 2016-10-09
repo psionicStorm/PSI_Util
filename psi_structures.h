@@ -48,9 +48,11 @@ extern "C" {
         char path_root[128];
         char path_source[128];
         char path_buckets[128];
+        char path_result[128];
         size_t read_buffer_size;
         size_t bucket_n;
         size_t queue_buffer_size;
+        size_t fixed_table_size;
         struct PSI_Queue ** queues;
         uint8_t element_pow;
         uint64_t divisor;
@@ -108,6 +110,7 @@ extern "C" {
         off_t size_source;
         uint8_t seed[3][16];
         uint8_t hash_n;
+        size_t fixed_table_size;
         size_t rec_limit;
         size_t read_buffer_size;
         FILE * f_stash;
