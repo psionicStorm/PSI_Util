@@ -1,17 +1,18 @@
-#include "psi_hashing.h" 
+#include "psi_hashing.h"
+#include "psi_misc.h" 
 
-void psi_get_64bit_sha256_with_seed(uint8_t seed[16], uint8_t element[16], uint64_t * ret_buffer) {
+void psi_get_64bit_sha256_with_seed(uint8_t * seed, uint8_t * element, uint64_t * ret_buffer, uint n) {
     uint8_t tmp[16];
     for (uint8_t i = 0; i < 16; i++)
         tmp[i] = element[i]^seed[i];
-    psi_get_64bit_sha256(tmp, ret_buffer);
+    psi_get_64bit_sha256(tmp, ret_buffer, n);
 }
 
-void psi_get_64bit_sha256(uint8_t element[16], uint64_t * ret_buffer) {
+void psi_get_64bit_sha256(uint8_t * element, uint64_t * ret_buffer, uint n) {
     uint8_t hash_buffer[SHA256_DIGEST_LENGTH];
     uint64_t reducer[4];
 
-    get_sha256(element, hash_buffer);
+    get_sha256(element, hash_buffer, n);
 
     for (uint8_t i = 0; i < 4; i++)
         reducer[i] = 0;
@@ -36,10 +37,10 @@ void psi_get_64bit_sha256(uint8_t element[16], uint64_t * ret_buffer) {
     *ret_buffer = reducer[0] ^ reducer[1];
 }
 
-void get_sha256(uint8_t element[16], uint8_t digest[SHA256_DIGEST_LENGTH]) {
+void get_sha256(uint8_t * element, uint8_t digest[SHA256_DIGEST_LENGTH], uint n) {
     SHA256_CTX c;
     SHA256_Init(&c);
-    SHA256_Update(&c, element, 16);
+    SHA256_Update(&c, element, n);
     SHA256_Final(digest, &c);
 }
 
@@ -64,9 +65,21 @@ void print_hash(uint8_t hash[32]) {
     printf("\n");
 }
 
-void get_16_bit_sha256(uint8_t * elem, uint8_t * hash) {
+void get_16_byte_sha256(uint8_t * elem, uint8_t * hash, uint n) {
     uint8_t buf[SHA256_DIGEST_LENGTH];
-    get_sha256(elem, buf);
+    get_sha256(elem, buf, n);
     for (int i = 0; i < 16; i++)
         hash[i] = buf[i]^buf[i + 16];
+}
+
+void get_10_byte_sha256(uint8_t * elem, uint8_t * hash, uint n) {
+    uint8_t tmp[SHA256_DIGEST_LENGTH];
+    get_16_byte_sha256(elem, tmp, n);
+    xor10_elem(tmp, hash);
+}
+
+void get_10_byte_sha256_with_seed(uint8_t * seed, uint8_t * elem, uint8_t * hash, uint n) {
+    for (size_t i = 0; i < 16; i++)
+        elem[i] ^= seed[i];
+    get_10_byte_sha256(elem, hash, n);
 }
