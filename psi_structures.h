@@ -32,6 +32,8 @@ extern "C" {
         char path_result[128];
         char path_folder_buckets[128];
         char path_lookup[128];
+        char path_lookup_cuckoo[128];
+        char path_lookup_masks[128];
         gboolean bucketing;
         size_t bucket_n;
         uint8_t ** buffer;
@@ -42,7 +44,16 @@ extern "C" {
         uint8_t element_size;
         uint8_t threads;
         gboolean lookup;
+
+        enum PSI_Communication_Protocol {
+            PSI_NH, PSI_OT
+        } protocol;
     } PSI_INTERSECTION_CTX;
+
+    /*
+     *  Naive Hashing or Oblivious Transfer.
+     */
+
 
     typedef struct PSI_SIMPLE_HASHING_CTX {
         char path_root[128];
@@ -61,6 +72,7 @@ extern "C" {
         uint8_t hash_n;
         uint8_t threads;
         double table_size;
+        gboolean reduction;
     } PSI_SIMPLE_HASHING_CTX;
 
     typedef struct PSI_NAIVE_HASHING_CTX {
@@ -92,10 +104,6 @@ extern "C" {
         size_t port;
     } PSI_NAIVE_HASHING_CTX;
 
-    /*typedef enum PSI_NETWORK_ROLE {
-        ROLE_SERVER, ROLE_CLIENT
-    } PSI_NETWORK_ROLE;
-     */
     typedef struct PSI_CUCKOO_HASHING_CTX {
         char path_source[128];
         char path_dest[128];
@@ -116,6 +124,7 @@ extern "C" {
         FILE * f_stash;
         FILE * f_source;
         FILE * f_dest;
+        gboolean reduction;
     } PSI_CUCKOO_HASHING_CTX;
 
     /*
