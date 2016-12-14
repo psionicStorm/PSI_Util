@@ -14,6 +14,11 @@ __Remove:__
 ```
 sudo make remove
 ```
+A static library for PSI algorithms and tools. It was thouth to improve 
+simplicity and reusability of code. Contains structures and functions that were 
+often used in PSI.
+
+__Install:__ sudo make install
 
 ###Dependencies:
 ---
