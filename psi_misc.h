@@ -35,9 +35,8 @@ extern "C" {
     void atob(char* string, uint8_t* binary);
     FILE * psi_try_fopen(char * path, char * settings);
     void print_byte_buf(uint8_t * buf, size_t n);
-    void reduce_elems_16_to_4_bytes(char * path, PSI_Hashing_Module module);
-    inline void xor_elem(uint8_t * get, uint8_t * put);
-    inline uint8_t xor4(uint8_t * a, uint8_t * result);
+    void psi_reduce_elems_16_to_10_bytes(char * path, PSI_Hashing_Module module);
+    void xor10_elem(uint8_t * get, uint8_t * put);
 
 #ifdef __cplusplus 
 }

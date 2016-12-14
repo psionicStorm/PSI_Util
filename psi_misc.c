@@ -95,38 +95,60 @@ void print_byte_buf(uint8_t * buf, size_t n) {
     printf("\n");
 }
 
-void reduce_elems_16_to_4_bytes(char * path, PSI_Hashing_Module module) {
-    size_t extra, init_size, reduced_size;
+void psi_reduce_elems_16_to_10_bytes(char * path, PSI_Hashing_Module module) {
+    size_t init_extra, extra, init_size, reduced_size, elems = 0, bins = 0;
     FILE * f = psi_try_fopen(path, "rb");
     char path_reduced[strlen(path) + 9];
     sprintf(path_reduced, "%s_reduced", path);
-    FILE * f_reduced = psi_try_fopen(path_reduced, "ab");
+    FILE * f_reduced = psi_try_fopen(path_reduced, "wb");
 
     if (module == PSI_Cuckoo_Hashing) {
-        extra = 3;
+        init_extra = 3;
+        extra = 0;
     } else {
-        extra = 1;
+        init_extra = extra = 1;
     }
 
-    init_size = 16 + extra;
-    reduced_size = 4 + extra;
+    init_size = 16 + init_extra;
+    reduced_size = 10 + extra;
+
+    printf("Element reduction\n");
+    printf("Old element : %zu + %zu B\n", init_size - init_extra, init_extra);
+    printf("New element : %zu + %zu B\n", reduced_size - extra, extra);
+
+    elems = 0;
+    bins = 0;
     uint8_t read_buf[init_size];
-    uint8_t write_buf[reduced_size];
-
-    while (fread(read_buf, init_size, 1, f)) {
-        xor_elem(read_buf, write_buf);
-        memcpy(write_buf + reduced_size, read_buf + init_size, extra);
+    while (fread(read_buf, init_size, 1, f) > 0) {
+        uint8_t write_buf[reduced_size];
+        xor10_elem(read_buf, write_buf);
+        memcpy(write_buf + reduced_size - extra,
+                read_buf + init_size - init_extra, extra);
         fwrite(write_buf, reduced_size, 1, f_reduced);
+        elems += init_size;
+        if (module == PSI_Simple_Hashing && read_buf[init_size - 1]&0x80)
+            bins++;
+        else if (module == PSI_Cuckoo_Hashing)
+            bins++;
+        if (module == PSI_Simple_Hashing && read_buf[init_size - 1] !=
+                write_buf[reduced_size - 1])
+            printf("Error reducing elements : Wrong bin flag\n");
     }
+
+    printf("Reduced %zu elements within %zu bins\n", elems / init_size, bins);
 }
 
-inline void xor_elem(uint8_t * get, uint8_t * put) {
-    xor4(get, put);
-    xor4(get + 4, put + 1);
-    xor4(get + 8, put + 2);
-    xor4(get + 12, put + 3);
-}
+//16=>10
 
-inline uint8_t xor4(uint8_t * a, uint8_t * result) {
-    *result = a[0] ^ a[1] ^ a[2] ^ a[3];
+void xor10_elem(uint8_t * get, uint8_t * put) {
+    put[0] = get[0];
+    put[1] = get[1] ^ get[2];
+    put[2] = get[3];
+    put[3] = get[4] ^ get[5];
+    put[4] = get[6] ^ get[7];
+    put[5] = get[8];
+    put[6] = get[9] ^ get[10];
+    put[7] = get[11];
+    put[8] = get[12] ^ get[13];
+    put[9] = get[14] ^ get[15];
 }
